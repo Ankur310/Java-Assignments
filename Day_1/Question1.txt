@@ -1,0 +1,10 @@
+1. What is normalization and why it is needed?
+
+Ans---> Normalization is a process of decomposing the tables until and unless each  and 
+        every sub-table should have a unique kind of data and should have a single idea.
+        It is needed because when our table have a lot of columns then we might face 
+        some issue while performing CRUD opertions.Actually what happens is It starts 
+        to behave anomaly.
+        It is used to avoid redandancy and also perform CRUD operation optimally.
+
+
