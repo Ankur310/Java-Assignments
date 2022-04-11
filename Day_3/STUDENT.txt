@@ -1,0 +1,30 @@
+CREATE table student(
+student_id int PRIMARY KEY auto_increment,
+name varchar(20),
+address varchar(20));
+
+insert into student values(1,"Ankur Singh","Patna");
+insert into student values(2,"Satyam Singh","Goa");
+insert into student values(3,"Honey Singh","Banglore");
+insert into student values(4,"Ankit Rai","Lucknow");
+insert into student values(5,"Piyush Rai","Chandigarh");
+
+
+
+CREATE table marks(
+marks_id int PRIMARY KEY auto_increment,
+subject varchar(20),
+score varchar(20),
+student_id int,
+FOREIGN KEY (student_id) REFERENCES student(student_id));
+
+insert into marks values(1,'maths',"100",1);
+insert into marks values(2,'maths',"80",2);
+insert into marks values(3,'maths',null,3);
+insert into marks values(4,'maths',"60",4);
+insert into marks values(5,'maths',null,5);
+
+QUESTION-->
+
+select marks.student_id,name,score,IFNULL(score,-1) FROM 
+student,marks WHERE student.student_id = marks.student_id;

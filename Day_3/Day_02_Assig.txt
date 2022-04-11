@@ -1,0 +1,96 @@
+SHOWcreate table complex(complex_id int primary key, complex_name varchar(20));
+insert into complex values(1,'Akash-Ganga');
+insert into complex values(2,'MahaDevi');
+
+//Creating table of BUILDING 
+create table  building(build_id int primary key, build_name varchar(20),address varchar(20),complex_id int,
+FOREIGN KEY (complex_id) REFERENCES complex(complex_id));  
+insert into building values(101,'Akash', 'Patna',1);
+insert into building values(102,'Ganga', 'Rajgir',2);
+INSERT into building values(201,'Maha', 'Chapra',2);
+INSERT INTO building values(202,'Devi', 'Siwan',1);
+
+
+
+//CREATING table of APAERTMENT
+CREATE table  Apartment(apt_id int primary key, unit_no varchar(20),
+build_id int, FOREIGN KEY (build_id) REFERENCES building(build_id));
+insert into Apartment values(11,'unit_1',101);
+insert into Apartment values(12,'unit_2',102);
+insert into Apartment values(21,'unit_2',201);
+insert into Apartment values(22,'unit_3',202);
+
+
+//CREATING table of APTTENTANT
+CREATE table AptTentant(Id int primary key, apt_id int , 
+tentant_id int,
+FOREIGN KEY (apt_id) REFERENCES Apartment(apt_id),
+FOREIGN KEY (tentant_id) REFERENCES tentants(tentant_id));
+insert into apttentant values(61,11,51);
+insert into apttentant values(62,11,51);
+insert into apttentant values(63,12,53);
+insert into apttentant values(64,21,54);
+insert into apttentant values(65,22,54);
+
+
+CREATING table of tentants;
+
+CREATE table tentants(tentant_name varchar(20), tentant_id int primary key);
+insert into tentants values('Ankur',51);
+insert into tentants values('Honey',52);
+insert into tentants values('Satyam',53);
+insert into tentants values('JhunJhun',54);
+insert into tentants values('Aditya',55);
+
+//CREATING table of request
+
+CREATE table request(id int primary key,status varchar(200),apt_id int,
+descrip varchar(200),FOREIGN KEY (apt_id) REFERENCES apttentant(apt_id));
+insert into request values(301,'Pending',11,'nothing to say');
+insert into request values(302,'Fullfilled',12,'nothing');
+insert into request values(303,'pending',21,'something');
+
+
+
+NOW COMING TO  THE QUESTION PART
+
+
+1--> Write a SQL query to get a list of tentants who are renting more than one apartment.
+
+     SELECT * FROM tentants where tentant_id IN
+     (SELECT * from apttentant GROUP BY apt_id HAVING COUNT(*)>1);
+
+2--> Write a  SQL query to get a list of all buildings and the number of
+     open requests(Requests in which status equals "Open".
+
+
+   SELECT build_name,address FROM
+   building,apartment,apttentant,request WHERE
+   request.apt_id = apttentant.apt_id AND
+   apttentant.apt_id = apartment.apt_id AND
+   apartment.build_id = building.build_id; 
+
+
+
+3--> Building #11 is undergoing a major renovation. Implement
+     a query to close all requests from apertments in this building.
+
+
+   DELETE FROM request where apt_id in
+   (SELECT apt_id FROM apartment WHERE
+    apartment.build_id = 101);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+CREATE table department(
+departmentId int PRIMARY KEY,
+dept_name varchar(20)
+);
+
+insert into department values(1,"Sales");
+insert into department values(2,"Marketing");
+insert into department values(3,"Development");
+
+
+
+CREATE table employee(
+id int primary key,
+emp_name varchar(100),
+salary int,
+departmentId int,
+FOREIGN KEY (departmentId) REFERENCES department(departmentId)
+);
+
+insert into employee values(1,"Ankur",100000,3);
+insert into employee values(2,"Ankit",40000,2);
+insert into employee values(3,"Prince",30000,2);
+insert into employee values(4,"Abhishek",20000,1);
+
+
+
+
+Question --->
+Write an SQL query to find employees who have the highest salary in each of the
+departments.
+Return the result table in any order
+
+SELECT dept_name,emp_name,MAX(salary) FROM department INNER JOIN employee ON department.departmentId = 
+employee.departmentId;

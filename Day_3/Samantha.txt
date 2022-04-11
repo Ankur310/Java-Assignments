@@ -1,0 +1,65 @@
+CREATE table onlinecustomer(
+customerId int PRIMARY KEY,
+customerName varchar(100),
+customerCity varchar(100),
+customerMail varchar(100));
+
+insert into onlinecustomer values(1,"Ankur","Patna","abc@gmail.com");
+insert into onlinecustomer values(2,"Ankit","Chapra","ankit@gmail.com");
+insert into onlinecustomer values(3,"Aman","Pune","aman@gmail.com");
+insert into onlinecustomer values(4,"Ankush","Delhi","ankush@gmail.com");
+insert into onlinecustomer values(5,"Aarohi","Punjab","aarohi@gmail.com");
+
+
+
+
+
+
+CREATE table orders(
+orderId int PRIMARY KEY,
+customerId int,
+orderTotal float,
+discountRate float,
+FOREIGN KEY (customerId) REFERENCES onlineCustomer(customerId),
+orderDate varchar(100));
+
+insert into orders values(1,1,1000,50,"22-04-10");
+insert into orders values(2,2,2000,20,"22-04-14");
+insert into orders values(3,3,3000,30,"22-04-13");
+insert into orders values(4,4,4000,40,"22-04-12");
+insert into orders values(5,5,5000,60,"22-04-11");
+
+
+CREATE table sales(
+salesId int PRIMARY KEY,
+orderId int,
+FOREIGN KEY (orderId) REFERENCES orders(orderId),
+salesTotal float);
+
+insert into sales values(10,2,1980);
+insert into sales values(11,4,3960);
+insert into sales values(12,5,4940);
+
+
+
+
+QUESTION --> 
+we need all rows of the orders table, which are matched to onlinecustomers
+tables. On the other hand, these rows do not exist in the sales table.
+
+SELECT customerName, customerCity, customerMail, orderTotal,salesTotal
+FROM onlinecustomer
+INNER JOIN
+orders
+ON onlinecustomer.customerid = orders.customerid
+LEFT JOIN
+sales 
+ON orders.orderId = sales.orderId
+WHERE sales.salesId IS NULL
+
+
+
+
+
+
+
