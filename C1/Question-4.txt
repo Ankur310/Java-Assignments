@@ -1,0 +1,22 @@
+CREATE table Person(
+personId int Primary key,
+fistName varchar(20),
+lastName varchar(20));
+insert into Person values(1,"Ankur","Singh");
+insert into Person values(2,"Jhunjhun","Singh");
+
+
+
+CREATE table Address(
+addressId int primary key,
+personId int,
+city varchar(20),
+state varchar(20));
+insert into Address values(1,1,"Patna","Chapra");
+insert into Address values(2,3,"Mumbai","MH");
+
+
+Question 4-->
+
+SELECT fistName,lastName,city,state from Person as p Left join address as a
+ON a.personId = p.personId;

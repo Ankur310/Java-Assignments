@@ -1,0 +1,42 @@
+CREATE table student(
+id int primary key,
+name varchar(20));
+insert into student values(1,"Ankur");
+insert into student values(2,"Jhunjhun");
+insert into student values(3,"Satyam");
+insert into student values(4,"Ankit");
+insert into student values(5,"Prince");
+
+
+
+CREATE table friends(
+id int primary key,
+friend_id int);
+insert into friends values(1,4);
+insert into friends values(3,5);
+insert into friends values(2,3);
+insert into friends values(4,2);
+insert into friends values(5,1);
+
+
+CREATE table packages(
+id int primary key,
+salary float);
+insert into packages values(1,10);
+insert into packages values(2,8);
+insert into packages values(3,9);
+insert into packages values(4,7);
+insert into packages values(5,8.5);
+
+
+QUESTION--1
+Write a query to output the names of those students whose best friends
+got offered a higher salary than them. Names must be ordered by the
+salary amount offered to the best friends. It is guaranteed that no two
+students got same salary offer.
+
+SELECT salary from friends left join packages ON
+friends.id = packages.id;
+
+
+
